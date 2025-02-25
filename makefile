@@ -6,6 +6,6 @@ run: build
 
 push:
 	docker build -t hello-http:latest .
-	docker tag hello-http:latest frwentianqi/hello-http:0.1.0
-	docker push frwentianqi/hello-http:0.1.0
+	docker tag hello-http:latest frwentianqi/hello-http:latest
+	docker push frwentianqi/hello-http:latest
 	docker image rm hello-http:latest
