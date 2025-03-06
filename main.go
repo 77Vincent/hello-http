@@ -40,6 +40,20 @@ func main() {
 		panic(fmt.Errorf("LATENCY must be a number, got %s", latency))
 	}
 
+	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		time.Sleep(time.Duration(l) * time.Millisecond)
+		w.Header().Set("Content-Type", "application/json")
+
+		response := map[string]string{
+			"message": "ok",
+			"latency": time.Since(start).String(),
+		}
+		if err = json.NewEncoder(w).Encode(response); err != nil {
+			panic(err)
+		}
+	})
+
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		time.Sleep(time.Duration(l) * time.Millisecond)
@@ -49,7 +63,21 @@ func main() {
 			"message": "world",
 			"latency": time.Since(start).String(),
 		}
-		if err := json.NewEncoder(w).Encode(response); err != nil {
+		if err = json.NewEncoder(w).Encode(response); err != nil {
+			panic(err)
+		}
+	})
+
+	http.HandleFunc("/hello/world", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		time.Sleep(time.Duration(l) * time.Millisecond)
+		w.Header().Set("Content-Type", "application/json")
+
+		response := map[string]string{
+			"message": "hello world",
+			"latency": time.Since(start).String(),
+		}
+		if err = json.NewEncoder(w).Encode(response); err != nil {
 			panic(err)
 		}
 	})
@@ -63,14 +91,28 @@ func main() {
 			"message": "hello",
 			"latency": time.Since(start).String(),
 		}
-		if err := json.NewEncoder(w).Encode(response); err != nil {
+		if err = json.NewEncoder(w).Encode(response); err != nil {
+			panic(err)
+		}
+	})
+
+	http.HandleFunc("/world/hello", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		time.Sleep(time.Duration(l) * time.Millisecond)
+		w.Header().Set("Content-Type", "application/json")
+
+		response := map[string]string{
+			"message": "world hello",
+			"latency": time.Since(start).String(),
+		}
+		if err = json.NewEncoder(w).Encode(response); err != nil {
 			panic(err)
 		}
 	})
 
 	ps := fmt.Sprintf(":%d", p)
 	fmt.Printf("Listening on %s\n", ps)
-	if err := http.ListenAndServe(ps, nil); err != nil {
+	if err = http.ListenAndServe(ps, nil); err != nil {
 		panic(err)
 	}
 }
