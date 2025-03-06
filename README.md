@@ -17,30 +17,52 @@ docker run -p 8080:8080 -e LATENCY=100 frwentianqi/hello-http
 
 ## Routes
 
+### /status
+```bash
+open http://localhost:8080/hello
+
+{
+    "latency": "100.583ms",
+    "message": "ok"
+}
+```
+
 ### /hello
 ```bash
 open http://localhost:8080/hello
-```
 
-You will get:
-
-```json
 {
     "latency": "100.583ms",
     "message": "world"
 }
 ```
 
+### /hello/world
+```bash
+open http://localhost:8080/hello/world
+
+{
+    "latency": "100.583ms",
+    "message": "hello world"
+}
+```
+
 ### /world
 ```bash
 open http://localhost:8080/world
-```
 
-You will get:
-
-```json
 {
     "latency": "100.123ms",
     "message": "hello"
+}
+```
+
+### /world/hello
+```bash
+open http://localhost:8080/world/hello
+
+{
+    "latency": "100.123ms",
+    "message": "world hello"
 }
 ```
