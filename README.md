@@ -19,10 +19,21 @@ docker run -p 8080:8080 -e LATENCY=100 frwentianqi/hello-http
 
 ### /status
 ```bash
-open http://localhost:8080/hello
+open http://localhost:8080/status
 
 {
     "latency": "100.583ms",
+    "message": "ok"
+}
+```
+
+### /version
+```bash
+open http://localhost:8080/version
+
+{
+    "latency": "100.583ms",
+    "version": "1.1.0"
     "message": "ok"
 }
 ```

@@ -54,6 +54,21 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		time.Sleep(time.Duration(l) * time.Millisecond)
+		w.Header().Set("Content-Type", "application/json")
+
+		response := map[string]string{
+			"message": "ok",
+			"version": "1.1.0",
+			"latency": time.Since(start).String(),
+		}
+		if err = json.NewEncoder(w).Encode(response); err != nil {
+			panic(err)
+		}
+	})
+
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		time.Sleep(time.Duration(l) * time.Millisecond)
